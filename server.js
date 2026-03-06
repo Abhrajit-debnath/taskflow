@@ -13,6 +13,7 @@ const morgan = require("morgan");
 const express = require("express");
 const connectDB = require("./src/config/database");
 const authRoutes = require("./src/routes/auth/auth.routes");
+const taskRoutes = require("./src/routes/tasks/task.routes");
 const errorHandler = require("./src/middleware/error.middleware");
 
 const PORT = process.env.PORT || 8000;
@@ -33,9 +34,13 @@ app.use(express.json());
 
 app.use(morgan("dev"));
 
-// Auth Routes
+// Auth Route
 
 app.use("/api/v1/auth", authRoutes);
+
+// Task Route
+
+app.use("/api/v1/task", taskRoutes);
 
 // Middleware to handel error
 
