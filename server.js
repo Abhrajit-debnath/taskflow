@@ -14,6 +14,7 @@ const express = require("express");
 const connectDB = require("./src/config/database");
 const authRoutes = require("./src/routes/auth/auth.routes");
 const taskRoutes = require("./src/routes/tasks/task.routes");
+const adminRoutes = require("./src/routes/admin/admin.routes");
 const errorHandler = require("./src/middleware/error.middleware");
 
 const PORT = process.env.PORT || 8000;
@@ -41,6 +42,8 @@ app.use("/api/v1/auth", authRoutes);
 // Task Route
 
 app.use("/api/v1/task", taskRoutes);
+
+app.use("/api/v1/admin", adminRoutes);
 
 // Middleware to handel error
 
