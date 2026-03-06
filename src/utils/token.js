@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-// Generating token
+// Generate token helper
 
 function generateAccessToken(id, role) {
   return jwt.sign(
@@ -10,4 +10,8 @@ function generateAccessToken(id, role) {
   );
 }
 
-module.exports = { generateAccessToken };
+function decodeToken(token) {
+  return jwt.verify(token,process.env.JWT_SECRET);
+}
+
+module.exports = { generateAccessToken,decodeToken };

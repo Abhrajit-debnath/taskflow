@@ -1,6 +1,10 @@
 const express = require("express");
 const registerUser = require("../../controllers/auth/register.controller");
-const { registerValidator, handelValidation, loginValidator } = require("../../validators/auth.validator");
+const {
+  registerValidator,
+  handelValidation,
+  loginValidator,
+} = require("../../validators/auth.validator");
 const loginUser = require("../../controllers/auth/login.controller");
 
 // Creating router instance
