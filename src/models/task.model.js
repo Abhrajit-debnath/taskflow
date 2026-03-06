@@ -6,7 +6,6 @@ const taskSchema = new mongoose.Schema(
       type: String,
       required: true,
       trim: true,
-      index:true
     },
     description: {
       type: String,
@@ -26,6 +25,7 @@ const taskSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
+      index:true
     },
   },
   { timestamps: true },

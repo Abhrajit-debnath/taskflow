@@ -7,6 +7,7 @@ const createTask = require("../../controllers/tasks/createTask.controller");
 const { authMiddleware } = require("../../middleware/auth.middleware");
 const getTasks = require("../../controllers/tasks/getTask.controller");
 const updateTask = require("../../controllers/tasks/updateTask.controller");
+const deleteTask = require("../../controllers/tasks/deleteTask.controller");
 
 // Creating router instance
 
@@ -17,5 +18,6 @@ const router = express.Router();
 router.post("/", authMiddleware, taskValidator, handelValidation, createTask);
 router.get("/", authMiddleware, getTasks);
 router.put("/:id", authMiddleware, updateTask);
+router.delete("/:id", authMiddleware, deleteTask);
 
 module.exports = router;
