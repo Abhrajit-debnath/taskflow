@@ -4,7 +4,6 @@ const logger = require("../../utils/logger");
 async function createTask(req, res, next) {
  
   try {
-    console.log(req.body);
     
     const { title, description, status, priority } = req.body;
     
