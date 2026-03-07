@@ -9,6 +9,7 @@ dotenv.config();
 // Requiring Logger for logs
 
 const logger = require("./src/utils/logger");
+const cors = require("cors")
 const morgan = require("morgan");
 const express = require("express");
 const connectDB = require("./src/config/database");
@@ -19,17 +20,20 @@ const errorHandler = require("./src/middleware/error.middleware");
 const swaggerUi = require("swagger-ui-express");
 const swaggerSpec = require("./src/config/swagger");
 
-
-
 const PORT = process.env.PORT || 8000;
 
 // Creating express instance
 
 const app = express();
 
+
 // Connect to db
 
 connectDB();
+
+// Cors
+
+app.use(cors())
 
 // Middlewares
 
