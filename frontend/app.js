@@ -81,12 +81,17 @@ async function handleRegister(e) {
       body: JSON.stringify({ name, email, password }),
     });
     const data = await res.json();
+    console.log(data);
+
     if (res.status === 201) {
       showMessage(data.message, "success");
       registerForm.reset();
       showLogin();
     } else {
-      showMessage(data.message, "error");
+      if (data.errors && data.errors.length > 0) {
+        const errorMsg = data.errors.map((e) => e.message).join(", ");
+        showMessage(errorMsg, "error");
+      }
     }
   } catch {
     showMessage("Something went wrong", "error");
@@ -238,8 +243,12 @@ function renderTasks(tasks) {
         <button class="delete-btn">Delete</button>
       </div>
     `;
-    card.querySelector(".edit-btn").addEventListener("click", () => startEdit(task));
-    card.querySelector(".delete-btn").addEventListener("click", () => deleteTask(task._id));
+    card
+      .querySelector(".edit-btn")
+      .addEventListener("click", () => startEdit(task));
+    card
+      .querySelector(".delete-btn")
+      .addEventListener("click", () => deleteTask(task._id));
     taskList.appendChild(card);
   });
 }
