@@ -16,6 +16,10 @@ const authRoutes = require("./src/routes/auth/auth.routes");
 const taskRoutes = require("./src/routes/tasks/task.routes");
 const adminRoutes = require("./src/routes/admin/admin.routes");
 const errorHandler = require("./src/middleware/error.middleware");
+const swaggerUi = require("swagger-ui-express");
+const swaggerSpec = require("./src/config/swagger");
+
+
 
 const PORT = process.env.PORT || 8000;
 
@@ -48,6 +52,8 @@ app.use("/api/v1/admin", adminRoutes);
 // Middleware to handel error
 
 app.use(errorHandler);
+
+app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Listening to server
 
