@@ -82,7 +82,7 @@ async function handleRegister(e) {
     });
     const data = await res.json();
     if (res.status === 201) {
-      showMessage("Registered! Please login.", "success");
+      showMessage(data.message, "success");
       registerForm.reset();
       showLogin();
     } else {
@@ -149,6 +149,7 @@ async function handleTaskSubmit(e) {
     return;
   }
 
+  // Update existing task
   if (editingTaskId) {
     try {
       const res = await fetch(`${API}/task/${editingTaskId}`, {
@@ -159,12 +160,15 @@ async function handleTaskSubmit(e) {
         },
         body: JSON.stringify({ title, description, status, priority }),
       });
+      const data = await res.json();
       if (res.status === 200) {
         taskForm.reset();
         editingTaskId = null;
         document.getElementById("taskBtn").textContent = "Add Task";
-        showMessage("Task updated!", "success", true);
+        showMessage(data.message, "success", true);
         loadTasks();
+      } else {
+        showMessage(data.message, "error", true);
       }
     } catch {
       showMessage("Something went wrong", "error", true);
@@ -185,7 +189,7 @@ async function handleTaskSubmit(e) {
     const data = await res.json();
     if (res.status === 201) {
       taskForm.reset();
-      showMessage("Task created!", "success", true);
+      showMessage(data.message, "success", true);
       loadTasks();
     } else {
       showMessage(data.message, "error", true);
@@ -247,9 +251,12 @@ async function deleteTask(id) {
       method: "DELETE",
       headers: { Authorization: `Bearer ${token}` },
     });
+    const data = await res.json();
     if (res.status === 200) {
-      showMessage("Task deleted!", "success", true);
+      showMessage(data.message, "success", true);
       loadTasks();
+    } else {
+      showMessage(data.message, "error", true);
     }
   } catch {
     showMessage("Something went wrong", "error", true);
